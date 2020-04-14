@@ -11,6 +11,6 @@ RUN npm run build
 FROM nginx
 # this will expose port 80 on AWS Elastic Beanstalk so that it will be available
 EXPOSE 80
-# copy from the "builder" phase above from the first directory, to the dir on nginx (specified in the container specs on docker hub)
-COPY --from=builder /app/build /usr/share/nginx/html 
+# copy from 0 instead of "builder". The phases are numbered, so 0 should be associated with "builder" above
+COPY --from=0 /app/build /usr/share/nginx/html 
 
