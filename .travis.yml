@@ -10,3 +10,21 @@ before_install:
 script:
   # the "-e CI=true" is just to make sure the test process exits when done
   - docker run -e CI=true jeremy/docker-react npm run test
+
+# tell travis CI how to deploy our application to Elastic Beanstalk
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-tutorial-app"
+  # This is whatever is indicated as the Elastic Beanstalk Environment (should be in bold)
+  env: "DockerTutorialApp-env"
+  # When you initiate the EBS environment this is created, so go and get the name of it
+  bucket_name: "elasticbeanstalk-us-east-1-470465102685"
+  # should be the same as "app" name above
+  bucket_path: "docker-tutorial-app"
+  # only deploy when code is pulled into the master branch
+  on: 
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+
