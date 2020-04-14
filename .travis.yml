@@ -1,0 +1,12 @@
+sudo: required
+service:
+  - docker
+
+before_install:
+  # here we tak this so we know how to refer to the container
+  # otherwise we would get an ID we're not aware of
+  - docker build -t jeremy/docker-react -f Dockerfile.dev .
+
+script:
+  # the last set of tags and command is just to make sure the test process exits when done
+  - docker run jeremy/docker-react npm run test -- --coverage
