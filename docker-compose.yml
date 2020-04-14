@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    build: 
+      # where should we pull from? pwd in this case.
+      context: .
+      dockerfile: Dockerfile.dev
+    ports: 
+      - "3000:3000"
+    volumes:
+      # disregard overwriting the node_modules directory on the container
+      - /app/node_modules
+      # map pwd to /app directory on the container
+      - .:/app
