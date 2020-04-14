@@ -8,5 +8,5 @@ before_install:
   - docker build -t jeremy/docker-react -f Dockerfile.dev .
 
 script:
-  # the last set of tags and command is just to make sure the test process exits when done
-  - docker run jeremy/docker-react npm run test -- --coverage
+  # the "-e CI=true" is just to make sure the test process exits when done
+  - docker run -e CI=true jeremy/docker-react npm run test
